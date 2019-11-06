@@ -135,6 +135,14 @@ public class PermissionsActivity extends QuickActivity {
             mFlagHasWriteStoragePermission = true;
         }
 
+        if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            mNumPermissionsToRequest++;
+            mShouldRequestWriteStoragePermission = true;
+        } else {
+            mFlagHasWriteStoragePermission = true;
+        }
+
         if (mSettingsManager.getBoolean(SettingsManager.SCOPE_GLOBAL,
             Keys.KEY_RECORD_LOCATION)
                 && (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
